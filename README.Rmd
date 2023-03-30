@@ -1,0 +1,25 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+# NBA Analysis
+
+### Author: David Suryanto
+
+![](https://1000logos.net/wp-content/uploads/2017/04/Logo-NBA.png)
+
+## Project Goal:
+
+## Dataset:
+
+Please see <https://www.basketball-reference.com/about/glossary.html> for info on variables
+
+## Sample Tables:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source('R/top5mvp.R')
+knitr::kable(recentmvp, caption = "Table 1: Recent NBA MVPs")
+knitr::kable(lowpoints, caption = "Table 2: MVPs with Lowest PPG")
+```
