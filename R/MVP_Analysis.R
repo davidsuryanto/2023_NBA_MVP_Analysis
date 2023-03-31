@@ -31,6 +31,7 @@ head(team_stats)
 # merge player data to team data
 team_stats <- merge(team_stats, abb, by = c("Team"))
 nba_data <- merge(team_stats, df, by = c("team_id", "season"))
+df <- merge(df, abb, by = c("team_id"))
 
 # top 5 mvps with most mvp titles
 top5_mvps <- mvp_winners %>%
@@ -48,6 +49,66 @@ top5_20ppg <- df %>%
             total_20ppg_seasons = sum(pts_per_g >= 20)) %>%
   top_n(5, total_20ppg_seasons) %>%
   arrange(desc(total_20ppg_seasons))
+
+# top 5 players with most double double stats per season
+top5_dd <- df %>%
+  group_by(player, season) %>%
+  mutate(double_doubles = case_when(
+    (pts_per_g >= 10 & ast_per_g >= 10) |
+      (pts_per_g >= 10 & trb_per_g >= 10) |
+      (pts_per_g >= 10 & stl_per_g >= 10) |
+      (pts_per_g >= 10 & blk_per_g >= 10) |
+      (ast_per_g >= 10 & trb_per_g >= 10) |
+      (ast_per_g >= 10 & stl_per_g >= 10) |
+      (ast_per_g >= 10 & blk_per_g >= 10) |
+      (trb_per_g >= 10 & stl_per_g >= 10) |
+      (trb_per_g >= 10 & blk_per_g >= 10) |
+      (stl_per_g >= 10 & blk_per_g >= 10) ~ 2,
+    TRUE ~ 0)) %>%
+  group_by(player) %>%
+  summarize(total_dd = sum(num_of_dd)) %>%
+  arrange(desc(total_dd)) %>%
+  head(5)
+
+# top 5 players with the highest ppg
+top5_ppg <- df %>%
+  group_by(player, season, Team, mvp) %>%
+  summarize(PPG = mean(pts_per_g)) %>%
+  ungroup() %>%
+  arrange(desc(PPG)) %>%
+  head(5)
+
+# top 5 players with the highest rpg
+top5_rpg <- df %>%
+  group_by(player, season, Team, mvp) %>%
+  summarize(RPG = mean(trb_per_g)) %>%
+  ungroup() %>%
+  arrange(desc(RPG)) %>%
+  head(5)
+
+# top 5 players with the highest apg
+top5_apg <- df %>%
+  group_by(player, season, Team, mvp) %>%
+  summarize(APG = mean(ast_per_g)) %>%
+  ungroup() %>%
+  arrange(desc(APG)) %>%
+  head(5)
+
+# top 5 players with the highest spg
+top5_spg <- df %>%
+  group_by(player, season, Team, mvp) %>%
+  summarize(SPG = mean(stl_per_g)) %>%
+  ungroup() %>%
+  arrange(desc(SPG)) %>%
+  head(5)
+
+# top 5 players with the highest bpg
+top5_bpg <- df %>%
+  group_by(player, season, Team, mvp) %>%
+  summarize(BPG = mean(blk_per_g)) %>%
+  ungroup() %>%
+  arrange(desc(BPG)) %>%
+  head(5)
 
 # Creating plots
 ggplot(mvp_stats2, aes(x = PTS, y = W.L.)) + geom_point() + labs(x = "Points per game", y = "Win/Lose percentage")
