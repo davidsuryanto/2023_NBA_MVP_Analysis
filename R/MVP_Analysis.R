@@ -34,14 +34,12 @@ nba_data <- merge(team_stats, df, by = c("team_id", "season"))
 
 # top 5 mvps
 top5_mvps <- mvp_winners %>%
-  group_by(Player) %>%
-  summarize(total_MVPs = sum(mvp)) %>%
+  group_by(player) %>%
+  summarize(total_MVPs = sum(mvp), 
+            Teams = toString(Team[which(mvp == "TRUE")]),
+            Years = toString(season[which(mvp == "TRUE")])) %>%
   arrange(desc(total_MVPs)) %>%
   head(5)
-
-mvp_count <- table(mvp_winners$player)
-top5_mvp_count <- head(sort(mvp_count, decreasing = TRUE), 5)
-top5_mvp <- data.frame(Player = names(top5_mvp_count), Team = Team(top5_mvp_count), season = season(top5_mvp_count), MVP_Count = as.numeric(top5_mvp_count))
 
 # Creating plots
 ggplot(mvp_stats2, aes(x = PTS, y = W.L.)) + geom_point() + labs(x = "Points per game", y = "Win/Lose percentage")
