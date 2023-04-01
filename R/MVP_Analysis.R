@@ -110,6 +110,22 @@ top5_bpg <- df %>%
   arrange(desc(BPG)) %>%
   head(5)
 
+# Effects of ppg towards mvp share shown in graph
+ggplot(df, aes(x = award_share, y = pts_per_g)) +
+  geom_point() +
+  facet_wrap('mvp')
+  xlab("Award Share") +
+  ylab("Points Per Game") +
+  ggtitle("MVP Share - Points Per Game")
+  
+# Effects of win share towards mvp share shown in graph
+ggplot(df, aes(x = award_share, y = ws)) +
+  geom_point() +
+  facet_wrap('mvp')
+  xlab("Award Share") +
+  ylab("Win Share") +
+  ggtitle("MVP Share - Win Share")
+
 # Creating plots
 ggplot(mvp_stats2, aes(x = PTS, y = W.L.)) + geom_point() + labs(x = "Points per game", y = "Win/Lose percentage")
 ggplot(df2, aes(x = Share, y = W.L.)) + geom_point() + labs(x = "MVP Share", y = "Win/Lose percentage")
