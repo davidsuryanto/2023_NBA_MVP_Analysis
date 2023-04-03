@@ -66,7 +66,8 @@ top5_dd <- df %>%
   group_by(player) %>% 
   summarize(total_dd = sum(double_double, na.rm = TRUE), 
             Teams = toString(Team[which(double_double == "TRUE")]),
-            Years = toString(season[which(double_double == "TRUE")])) %>% 
+            Years = toString(season[which(double_double == "TRUE")]), 
+            total_mvp = sum(mvp == "TRUE")) %>% 
   ungroup() %>% 
   top_n(5, total_dd)
 
