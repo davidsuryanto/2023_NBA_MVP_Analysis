@@ -50,25 +50,25 @@ top5_20ppg <- df %>%
   top_n(5, total_20ppg_seasons) %>%
   arrange(desc(total_20ppg_seasons))
 
-# top 5 players with most double double stats per season
-top5_dd <- df %>%
-  group_by(player, season) %>%
-  mutate(double_doubles = case_when(
-    (pts_per_g >= 10 & ast_per_g >= 10) |
-      (pts_per_g >= 10 & trb_per_g >= 10) |
-      (pts_per_g >= 10 & stl_per_g >= 10) |
-      (pts_per_g >= 10 & blk_per_g >= 10) |
-      (ast_per_g >= 10 & trb_per_g >= 10) |
-      (ast_per_g >= 10 & stl_per_g >= 10) |
-      (ast_per_g >= 10 & blk_per_g >= 10) |
-      (trb_per_g >= 10 & stl_per_g >= 10) |
-      (trb_per_g >= 10 & blk_per_g >= 10) |
-      (stl_per_g >= 10 & blk_per_g >= 10) ~ 2,
-    TRUE ~ 0)) %>%
-  group_by(player) %>%
-  summarize(total_dd = sum(num_of_dd)) %>%
-  arrange(desc(total_dd)) %>%
-  head(5)
+# Select the top 5 players with the most double-double stats
+df <- df %>%
+  mutate(double_double = (pts_per_g > 10 & ast_per_g > 10) |
+           (pts_per_g > 10 & trb_per_g > 10) |
+           (pts_per_g > 10 & stl_per_g > 10) |
+           (pts_per_g > 10 & blk_per_g > 10) |
+           (ast_per_g > 10 & trb_per_g > 10) |
+           (ast_per_g > 10 & stl_per_g > 10) |
+           (ast_per_g > 10 & blk_per_g > 10) |
+           (trb_per_g > 10 & stl_per_g > 10) |
+           (trb_per_g > 10 & blk_per_g > 10) |
+           (stl_per_g > 10 & blk_per_g > 10))
+top5_dd <- df %>% 
+  group_by(player) %>% 
+  summarize(total_dd = sum(double_double, na.rm = TRUE), 
+            Teams = toString(Team[which(double_double == "TRUE")]),
+            Years = toString(season[which(double_double == "TRUE")])) %>% 
+  ungroup() %>% 
+  top_n(5, total_dd)
 
 # top 5 players with the highest ppg
 top5_ppg <- df %>%
