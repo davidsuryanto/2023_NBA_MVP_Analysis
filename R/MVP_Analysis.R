@@ -138,6 +138,16 @@ ggplot(jokic_stats_subset, aes(x = season, y = Value, color = Stat)) +
   xlab("Season") +
   ylab("Value")
 
+# Giannis Antetokounmpo stats consistency over the years
+giannis_stats <- subset(df, player == "Giannis Antetokounmpo")
+giannis_stats_subset <- giannis_stats %>%
+  pivot_longer(cols = c("pts_per_g", "ast_per_g", "trb_per_g", "blk_per_g", "stl_per_g"),
+               names_to = "Stat", values_to = "Value")
+ggplot(giannis_stats_subset, aes(x = season, y = Value, color = Stat)) +
+  geom_line() +
+  ggtitle("Giannis Antetokounmpo's Stats") +
+  xlab("Season") +
+  ylab("Value")
 
 # Creating plots
 ggplot(mvp_stats2, aes(x = PTS, y = W.L.)) + geom_point() + labs(x = "Points per game", y = "Win/Lose percentage")
