@@ -1,6 +1,7 @@
 # Load package
 library(dplyr)
 library(ggplot2)
+library(tidyr)
 
 # read files
 df <- read.csv('data/NBA_Dataset.csv')
