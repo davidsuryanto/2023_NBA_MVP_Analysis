@@ -52,16 +52,16 @@ top5_20ppg <- df %>%
 
 # Select the top 5 players with the most double-double stats
 df <- df %>%
-  mutate(double_double = (pts_per_g > 10 & ast_per_g > 10) |
-           (pts_per_g > 10 & trb_per_g > 10) |
-           (pts_per_g > 10 & stl_per_g > 10) |
-           (pts_per_g > 10 & blk_per_g > 10) |
-           (ast_per_g > 10 & trb_per_g > 10) |
-           (ast_per_g > 10 & stl_per_g > 10) |
-           (ast_per_g > 10 & blk_per_g > 10) |
-           (trb_per_g > 10 & stl_per_g > 10) |
-           (trb_per_g > 10 & blk_per_g > 10) |
-           (stl_per_g > 10 & blk_per_g > 10))
+  mutate(double_double = (pts_per_g >= 10 & ast_per_g >= 10) |
+           (pts_per_g >= 10 & trb_per_g >= 10) |
+           (pts_per_g >= 10 & stl_per_g >= 10) |
+           (pts_per_g >= 10 & blk_per_g >= 10) |
+           (ast_per_g >= 10 & trb_per_g >= 10) |
+           (ast_per_g >= 10 & stl_per_g >= 10) |
+           (ast_per_g >= 10 & blk_per_g >= 10) |
+           (trb_per_g >= 10 & stl_per_g >= 10) |
+           (trb_per_g >= 10 & blk_per_g >= 10) |
+           (stl_per_g >= 10 & blk_per_g >= 10))
 top5_dd <- df %>% 
   group_by(player) %>% 
   summarize(total_dd = sum(double_double, na.rm = TRUE), 
@@ -126,6 +126,18 @@ ggplot(df, aes(x = award_share, y = ws)) +
   xlab("Award Share") +
   ylab("Win Share") +
   ggtitle("MVP Share - Win Share")
+  
+# Nikola Jokic performance consistency over the years
+jokic_stats <- subset(df, player == "Nikola Jokić")
+jokic_stats_subset <- jokic_stats %>%
+  pivot_longer(cols = c("pts_per_g", "ast_per_g", "trb_per_g", "blk_per_g", "stl_per_g"),
+               names_to = "Stat", values_to = "Value")
+ggplot(jokic_stats_subset, aes(x = season, y = Value, color = Stat)) +
+  geom_line() +
+  ggtitle("Nikola Jokic's Stats") +
+  xlab("Season") +
+  ylab("Value")
+
 
 # Creating plots
 ggplot(mvp_stats2, aes(x = PTS, y = W.L.)) + geom_point() + labs(x = "Points per game", y = "Win/Lose percentage")
