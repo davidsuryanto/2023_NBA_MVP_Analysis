@@ -11,7 +11,6 @@ mvp_winners <- df %>%
   group_by(season) %>%
   mutate(mvp = award_share == max(award_share)) %>%
   filter(mvp == 'TRUE')
-mvp_winners <- merge(mvp_winners, abb, by = c("team_id"))
 
 # mvp stats from another dataset
 mvp_stats2 <- df2 %>%
@@ -23,7 +22,7 @@ mvp_stats2 <- df2 %>%
 top5_mvps <- mvp_winners %>%
   group_by(player) %>%
   summarize(total_MVPs = sum(mvp), 
-            Teams = toString(Team[which(mvp == "TRUE")]),
+            Team = toString(Team[which(mvp == "TRUE")]),
             Years = toString(season[which(mvp == "TRUE")])) %>%
   arrange(desc(total_MVPs)) %>%
   head(5)
@@ -137,19 +136,24 @@ ggplot(embiid_stats_subset, aes(x = season, y = Value, color = Stat)) +
 
 # top 5's mvp candidates
 mvp_candidate_2022 <- df %>%
-  filter(season == 2022 & player %in% c("Nikola Jokić", "Giannis Antetokounmpo", "Joel Embiid", "Luka Dončić", "Jayson Tatum"))
+  filter(season == 2022 & player %in% c("Nikola Jokić", "Giannis Antetokounmpo", "Joel Embiid", "Luka Dončić", "Jayson Tatum")) %>%
+  select(player, season, Team, g, pts_per_g, trb_per_g, ast_per_g, blk_per_g, stl_per_g, fg_pct, per, ws, win_loss_pct, award_share, double_double,mvp)
 
 mvp_candidate_2021 <- df %>%
-  filter(season == 2021 & player %in% c("Nikola Jokić", "Joel Embiid", "Stephen Curry", "Giannis Antetokounmpo", "Luka Dončić"))
+  filter(season == 2021 & player %in% c("Nikola Jokić", "Joel Embiid", "Stephen Curry", "Giannis Antetokounmpo", "Luka Dončić")) %>%
+  select(player, season, Team, g, pts_per_g, trb_per_g, ast_per_g, blk_per_g, stl_per_g, fg_pct, per, ws, win_loss_pct, award_share, double_double,mvp)
 
 mvp_candidate_2020 <- df %>%
-  filter(season == 2020 & player %in% c("Giannis Antetokounmpo", "LeBron James", "James Harden", "Luka Dončić", "Kawhi Leonard"))
+  filter(season == 2020 & player %in% c("Giannis Antetokounmpo", "LeBron James", "James Harden", "Luka Dončić", "Kawhi Leonard")) %>%
+  select(player, season, Team, g, pts_per_g, trb_per_g, ast_per_g, blk_per_g, stl_per_g, fg_pct, per, ws, win_loss_pct, award_share, double_double,mvp)
 
 mvp_candidate_2019 <- df %>%
-  filter(season == 2019 & player %in% c("Giannis Antetokounmpo", "James Harden", "Paul George", "Nikola Jokić", "Stephen Curry"))
+  filter(season == 2019 & player %in% c("Giannis Antetokounmpo", "James Harden", "Paul George", "Nikola Jokić", "Stephen Curry")) %>%
+  select(player, season, Team, g, pts_per_g, trb_per_g, ast_per_g, blk_per_g, stl_per_g, fg_pct, per, ws, win_loss_pct, award_share, double_double,mvp)
 
 mvp_candidate_2018 <- df %>%
-  filter(season == 2018 & player %in% c("James Harden", "LeBron James", "Anthony Davis", "Damian Lillard", "Russell Westbrook"))
+  filter(season == 2018 & player %in% c("James Harden", "LeBron James", "Anthony Davis", "Damian Lillard", "Russell Westbrook")) %>%
+  select(player, season, Team, g, pts_per_g, trb_per_g, ast_per_g, blk_per_g, stl_per_g, fg_pct, per, ws, win_loss_pct, award_share, double_double,mvp)
 
 # Creating plots
 ggplot(mvp_stats2, aes(x = PTS, y = W.L.)) + geom_point() + labs(x = "Points per game", y = "Win/Lose percentage")
