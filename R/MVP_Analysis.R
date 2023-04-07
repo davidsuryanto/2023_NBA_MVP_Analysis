@@ -19,20 +19,6 @@ mvp_stats2 <- df2 %>%
   mutate(mvp = Pts.Won == max(Pts.Won)) %>%
   filter(mvp == 'TRUE') 
 
-# added a column of whether winning mvp that year
-df <- df %>%
-  group_by(season) %>%
-  mutate(mvp = award_share == max(award_share))
-
-# changed "Year" column name to "season"
-names(team_stats)[names(team_stats) == "Year"] <- "season"
-head(team_stats)
-
-# merge player data to team data
-team_stats <- merge(team_stats, abb, by = c("Team"))
-nba_data <- merge(team_stats, df, by = c("team_id", "season"))
-df <- merge(df, abb, by = c("team_id"))
-
 # top 5 mvps with most mvp titles
 top5_mvps <- mvp_winners %>%
   group_by(player) %>%
@@ -51,17 +37,6 @@ top5_20ppg <- df %>%
   arrange(desc(total_20ppg_seasons))
 
 # Select the top 5 players with the most double-double stats
-df <- df %>%
-  mutate(double_double = (pts_per_g >= 10 & ast_per_g >= 10) |
-           (pts_per_g >= 10 & trb_per_g >= 10) |
-           (pts_per_g >= 10 & stl_per_g >= 10) |
-           (pts_per_g >= 10 & blk_per_g >= 10) |
-           (ast_per_g >= 10 & trb_per_g >= 10) |
-           (ast_per_g >= 10 & stl_per_g >= 10) |
-           (ast_per_g >= 10 & blk_per_g >= 10) |
-           (trb_per_g >= 10 & stl_per_g >= 10) |
-           (trb_per_g >= 10 & blk_per_g >= 10) |
-           (stl_per_g >= 10 & blk_per_g >= 10))
 top5_dd <- df %>% 
   group_by(player) %>% 
   summarize(total_dd = sum(double_double, na.rm = TRUE), 
@@ -138,7 +113,7 @@ ggplot(jokic_stats_subset, aes(x = season, y = Value, color = Stat)) +
   xlab("Season") +
   ylab("Value")
 
-# Giannis Antetokounmpo stats consistency over the years
+# Giannis Antetokounmpo performance consistency over the years
 giannis_stats <- subset(df, player == "Giannis Antetokounmpo")
 giannis_stats_subset <- giannis_stats %>%
   pivot_longer(cols = c("pts_per_g", "ast_per_g", "trb_per_g", "blk_per_g", "stl_per_g"),
@@ -146,6 +121,17 @@ giannis_stats_subset <- giannis_stats %>%
 ggplot(giannis_stats_subset, aes(x = season, y = Value, color = Stat)) +
   geom_line() +
   ggtitle("Giannis Antetokounmpo's Stats") +
+  xlab("Season") +
+  ylab("Value")
+
+# Joel Embiid performance consistency over the years
+embiid_stats <- subset(df, player == "Joel Embiid")
+embiid_stats_subset <- embiid_stats %>%
+  pivot_longer(cols = c("pts_per_g", "ast_per_g", "trb_per_g", "blk_per_g", "stl_per_g"),
+               names_to = "Stat", values_to = "Value")
+ggplot(embiid_stats_subset, aes(x = season, y = Value, color = Stat)) +
+  geom_line() +
+  ggtitle("Joel Embiid's Stats") +
   xlab("Season") +
   ylab("Value")
 
