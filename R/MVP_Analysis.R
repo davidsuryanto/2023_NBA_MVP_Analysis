@@ -135,6 +135,22 @@ ggplot(embiid_stats_subset, aes(x = season, y = Value, color = Stat)) +
   xlab("Season") +
   ylab("Value")
 
+# top 5's mvp candidates
+mvp_candidate_2022 <- df %>%
+  filter(season == 2022 & player %in% c("Nikola Jokić", "Giannis Antetokounmpo", "Joel Embiid", "Luka Dončić", "Jayson Tatum"))
+
+mvp_candidate_2021 <- df %>%
+  filter(season == 2021 & player %in% c("Nikola Jokić", "Joel Embiid", "Stephen Curry", "Giannis Antetokounmpo", "Luka Dončić"))
+
+mvp_candidate_2020 <- df %>%
+  filter(season == 2020 & player %in% c("Giannis Antetokounmpo", "LeBron James", "James Harden", "Luka Dončić", "Kawhi Leonard"))
+
+mvp_candidate_2019 <- df %>%
+  filter(season == 2019 & player %in% c("Giannis Antetokounmpo", "James Harden", "Paul George", "Nikola Jokić", "Stephen Curry"))
+
+mvp_candidate_2018 <- df %>%
+  filter(season == 2018 & player %in% c("James Harden", "LeBron James", "Anthony Davis", "Damian Lillard", "Russell Westbrook"))
+
 # Creating plots
 ggplot(mvp_stats2, aes(x = PTS, y = W.L.)) + geom_point() + labs(x = "Points per game", y = "Win/Lose percentage")
 ggplot(df2, aes(x = Share, y = W.L.)) + geom_point() + labs(x = "MVP Share", y = "Win/Lose percentage")
