@@ -84,6 +84,18 @@ ggplot(df, aes(award_share, ws)) +
 
 
 
+### True shooting percentage - award share
+mvp_avg_ts_pct <- mean(mvp_winners$ts_pct)
+non_mvp_avg_ts_pct <- mean(non_mvp_winners$ts_pct)
+# mvp_avg_ts_pct = 59.3% and non_mvp_avg_ts_pct = 51.3% -> difference: 8%
+
+lm_ts_pct <- lm(award_share ~ ts_pct, data = train_data)
+summary(lm_ts_pct)
+
+# simple regression on award_share ~ ts_pct
+ggplot(train_data, aes(award_share, ts_pct)) +
+  geom_point() +
+  stat_smooth(method = lm)
 
 
 
