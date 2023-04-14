@@ -2,6 +2,8 @@
 library(dplyr)
 library(ggplot2)
 library(tidyr)
+library(lattice)
+library(caret)
 
 # read files
 df <- read.csv('data/NBA_Dataset.csv')
@@ -9,6 +11,7 @@ abb <- read.csv('data/abbreviations.csv')
 team_stats <- read.csv('data/renamed_teams.csv')
 df2 <- read.csv('data/cleaned_data.csv')
 player_stats_2023 <- read.csv('data/2023_NBA_Player_Stats.csv')
+players <- read.csv('data/NBA_Dataset_2.csv')
 
 # added a column of whether winning mvp that year
 df <- df %>%
@@ -36,3 +39,5 @@ df <- df %>%
            (trb_per_g >= 10 & stl_per_g >= 10) |
            (trb_per_g >= 10 & blk_per_g >= 10) |
            (stl_per_g >= 10 & blk_per_g >= 10))
+
+df <- subset(df, !(player == "JamesOn Curry" | player == "Alex Scales"))
