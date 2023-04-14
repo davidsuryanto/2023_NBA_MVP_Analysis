@@ -41,3 +41,4 @@ df <- df %>%
            (stl_per_g >= 10 & blk_per_g >= 10))
 
 df <- subset(df, !(player == "JamesOn Curry" | player == "Alex Scales"))
+df <- df[complete.cases(df$ts_pct), ]
