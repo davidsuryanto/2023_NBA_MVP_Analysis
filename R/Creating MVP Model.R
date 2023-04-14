@@ -68,6 +68,21 @@ non_mvp_avg_per <- mean(non_mvp_winners$per)
 
 
 
+### WIN SHARES AFFECT ON THE NUMBER OF VOTES PLAYERS GET
+mvp_avg_ws <- mean(mvp_winners$ws)
+non_mvp_avg_ws <- mean(non_mvp_winners$ws)
+# mvp_avg_ws = 16.02 and non_mvp_avg_ws = 2.62 -> difference: 13.4
+
+lm_ws <- lm(award_share ~ ws, data = train_data)
+summary(lm_ws)
+
+# simple regression on award_share ~ ws
+ggplot(df, aes(award_share, ws)) +
+  geom_point() +
+  stat_smooth(method = lm)
+
+
+
 
 
 
