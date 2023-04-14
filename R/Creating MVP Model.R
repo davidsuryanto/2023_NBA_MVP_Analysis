@@ -23,6 +23,9 @@ summary(lm_model)
 
 train_data <- subset(df, award_share > 0)
 
+
+
+
 ### WIN/LOSS PCT EFFECTS ON AWARD SHARE
 mvp_win_loss <- mvp_winners %>%
   select(player, Team, season, win_loss_pct, mvp) 
@@ -35,8 +38,11 @@ ggplot(mvp_winners, aes(x = win_loss_pct, y = award_share)) +
   ylab("Award Share") +
   ggtitle("Win/Loss Percentage - Award Share")
 
-lm_ws <- lm(award_share ~ ws, data = train_data)
-summary(lm_ws)
+lm_wlp <- lm(award_share ~ win_loss_pct, data = train_data)
+summary(lm_wlp)
+
+
+
 
 ### AVERAGE PER RATING FOR MVP AND NON-MVP WINNERS
 mvp_winners <- df %>%
@@ -46,9 +52,25 @@ mvp_winners <- df %>%
 
 non_mvp_winners <- filter(df, mvp == 'FALSE')
 
+lm_per <- lm(award_share ~ per, data = train_data)
+summary(lm_per)
+
+# simple regression on award_share ~ per
+ggplot(train_data, aes(award_share, per)) +
+  geom_point() +
+  stat_smooth(method = lm)
+
+# The difference between the average per for mvp and non-mvp winners is 15.6
 mvp_avg_per <- mean(mvp_winners$per)
 non_mvp_avg_per <- mean(non_mvp_winners$per)
-# The difference between the average per for mvp and non-mvp winners is 15.6
+# mvp_avg_per = 28.3 and non_mvp_avg_per = 12.7
+
+
+
+
+
+
+
 
 
 
