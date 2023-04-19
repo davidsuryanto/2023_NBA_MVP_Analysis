@@ -1,15 +1,19 @@
 source("R/Base_Code.R")
 
-# a model that determines the top 10 best performing players in each season
-set.seed(123)
-
-# split data into 80% training and 20% testing
-trainIndex <- createDataPartition(df$player, p = 0.8, list = FALSE, times = 1)
-train <- df[trainIndex,]
-test <- df[-trainIndex,]
+# # a model that determines the top 10 best performing players in each season
+# set.seed(123)
+# 
+# # split data into 80% training and 20% testing
+# trainIndex <- createDataPartition(df$player, p = 0.8, list = FALSE, times = 1)
+# train <- df[trainIndex,]
+# test <- df[-trainIndex,]
 
 # perform linear regression on training set
-lm_model <- lm(award_share ~ pts_per_g + trb_per_g + ast_per_g + stl_per_g + blk_per_g + ws + win_loss_pct + per, data = train)
+lm_model <- lm(award_share ~ pts_per_g + trb_per_g + ast_per_g + stl_per_g + blk_per_g + ws + win_loss_pct + per + ts_pct, data = train_data)
+
+
+pred <- predict(lm_model, player_stats_2023)
+
 
 # print summary of the model
 summary(lm_model)
@@ -21,8 +25,8 @@ summary(lm_model)
 # train_data <- subset(df, award_share > 0)
 # lm_model <- lm(award_share ~ pts_per_g + trb_per_g + ast_per_g + stl_per_g + blk_per_g + ws + win_loss_pct + per, data = train_data)
 
+# Only 581 NBA players received MVP votes from year 1982-2022
 train_data <- subset(df, award_share > 0)
-
 
 
 
@@ -97,6 +101,30 @@ ggplot(train_data, aes(award_share, ts_pct)) +
   geom_point() +
   stat_smooth(method = lm)
 
+
+
+
+##### AWARDS_SHARE ~ PPG, APG, RPG, SPG, BPG
+ggplot(train_data, aes(award_share, pts_per_g)) +
+  geom_point() +
+  stat_smooth(method = lm)
+# ppg matters!
+ggplot(train_data, aes(award_share, ast_per_g)) +
+  geom_point() +
+  stat_smooth(method = lm)
+# apg matters
+ggplot(train_data, aes(award_share, trb_per_g)) +
+  geom_point() +
+  stat_smooth(method = lm)
+# rpg matters
+ggplot(train_data, aes(award_share, stl_per_g)) +
+  geom_point() +
+  stat_smooth(method = lm)
+# spg does not really matter
+ggplot(train_data, aes(award_share, blk_per_g)) +
+  geom_point() +
+  stat_smooth(method = lm)
+# bpg does not really matter
 
 
 
