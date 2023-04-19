@@ -12,6 +12,7 @@ team_stats <- read.csv('data/renamed_teams.csv')
 df2 <- read.csv('data/cleaned_data.csv')
 player_stats_2023 <- read.csv('data/2023_NBA_Player_Stats.csv')
 players <- read.csv('data/NBA_Dataset_2.csv')
+team_stats_2023 <- read.csv('data/Team_Stats_2023.csv')
 
 # added a column of whether winning mvp that year
 df <- df %>%
@@ -26,6 +27,8 @@ head(team_stats)
 team_stats <- merge(team_stats, abb, by = c("Team"))
 nba_data <- merge(team_stats, df, by = c("team_id", "season"))
 df <- merge(df, abb, by = c("team_id"))
+player_stats_2023 <- merge(player_stats_2023, abb, by = c("team_id"))
+player_stats_2023 <- merge(player_stats_2023, team_stats_2023, by = c("Team"))
 
 # add a column of whether the player has a double-double season 
 df <- df %>%
