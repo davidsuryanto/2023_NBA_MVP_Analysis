@@ -33,7 +33,7 @@ Table 1: Recent NBA MVPs
 
 Table 2: MVPs with Lowest PPG
 
-## NBA MVP 1982-2022:
+## Last 10 NBA MVP:
 
 | Year | Player                | Pos | Team                  |  PTS |  AST |  TRB |  STL |  BLK |
 |-----:|:----------------------|:----|:----------------------|-----:|-----:|-----:|-----:|-----:|
@@ -43,3 +43,7 @@ Table 2: MVPs with Lowest PPG
 | 2019 | Giannis Antetokounmpo | PF  | Milwaukee Bucks       | 27.7 |  5.9 | 12.5 |  1.3 |  1.5 |
 | 2018 | James Harden          | SG  | Houston Rockets       | 30.4 |  8.8 |  5.4 |  1.8 |  0.7 |
 | 2017 | Russell Westbrook     | PG  | Oklahoma City Thunder | 31.6 | 10.4 | 10.7 |  1.6 |  0.4 |
+| 2016 | Stephen Curry         | PG  | Golden State Warriors | 30.1 |  6.7 |  5.4 |  2.1 |  0.2 |
+| 2015 | Stephen Curry         | PG  | Golden State Warriors | 23.8 |  7.7 |  4.3 |  2.0 |  0.2 |
+| 2014 | Kevin Durant          | SF  | Oklahoma City Thunder | 32.0 |  5.5 |  7.4 |  1.3 |  0.7 |
+| 2013 | LeBron James          | PF  | Miami Heat            | 26.8 |  7.3 |  8.0 |  1.7 |  0.9 |
