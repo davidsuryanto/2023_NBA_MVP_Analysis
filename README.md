@@ -43,10 +43,3 @@ Table 2: MVPs with Lowest PPG
 | 2019 | Giannis Antetokounmpo | PF  | Milwaukee Bucks       | 27.7 |  5.9 | 12.5 |  1.3 |  1.5 |
 | 2018 | James Harden          | SG  | Houston Rockets       | 30.4 |  8.8 |  5.4 |  1.8 |  0.7 |
 | 2017 | Russell Westbrook     | PG  | Oklahoma City Thunder | 31.6 | 10.4 | 10.7 |  1.6 |  0.4 |
-
-
-
-
-
-
-
