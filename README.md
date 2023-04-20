@@ -36,7 +36,7 @@ Table 2: MVPs with Lowest PPG
 ## NBA MVP 1982-2022:
 
 | Year | Player                | Pos | Team                  |  PTS |  AST |  TRB |  STL |  BLK |
-|-----:|:----------------------|:----|:----------------------|-----:|-----:|-----:|-----:|-----:|
+|------|-----------------------|-----|-----------------------|------|------|------|------|------|
 | 2022 | Nikola Jokić          | C   | Denver Nuggets        | 27.1 |  7.9 | 13.8 |  1.5 |  0.9 | 
 | 2021 | Nikola Jokić          | C   | Denver Nuggets        | 26.4 |  8.3 | 10.8 |  1.3 |  0.7 |
 | 2020 | Giannis Antetokounmpo | PF  | Milwaukee Bucks       | 29.5 |  5.6 | 13.6 |  1.0 |  1.0 |
