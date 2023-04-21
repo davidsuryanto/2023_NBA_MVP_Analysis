@@ -10,7 +10,7 @@ output:
 
 ![](https://1000logos.net/wp-content/uploads/2017/04/Logo-NBA.png)
 
-## Project Goal:
+## Project Goal: Predict The 2023 NBA MVP
 
 ## Dataset:
 
@@ -23,3 +23,47 @@ source('R/top5mvp.R')
 knitr::kable(recentmvp, caption = "Table 1: Recent NBA MVPs")
 knitr::kable(lowpoints, caption = "Table 2: MVPs with Lowest PPG")
 ```
+
+### **Table 1: MVP Winners (1982-2022)**
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source('R/Creating MVP Model.R')
+knitr::kable(mvps)
+```
+
+### **Table 2: MVPs Win/Loss Percentage**
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source('R/Creating MVP Model.R')
+knitr::kable(mvp_win_loss, caption = "Note: Only 11 out of the 41 (26.8%) MVP winners from 1982-2022 have win/loss percentage below 70% and only 3 of them are below 60%.")
+award_share_wlp
+```
+
+### **Graph: Correlation Between MVP Share and PER rating**
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source('R/Creating MVP Model.R')
+award_share_per
+```
+
+Note: MVPs average PER rating = 28.3 and Non-MVPs average PER rating = 12.7. This proves how crucial it is for NBA players to have a high PER rating in order to be considered in the MVP race.
+
+### **Graph:** Correlation Between MVP Share and Win Share
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source('R/Creating MVP Model.R')
+award_share_ws
+```
+
+Note: MVPs average win share = 16.02 and Non-MVPs average win share = 2.62. This proves how crucial it is for NBA players to have a high win share % in order to be considered in the MVP race.
+
+### **Graph: Correlation Between MVP Share and True Shooting %**
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source('R/Creating MVP Model.R')
+award_share_ts
+```
+
+Note: MVPs average true shooting(%) = 59.3% and Non-MVPs average true shooting(%) = 51.3%. This proves how crucial it is for NBA players to have a high true shooting % in order to be considered in the MVP race.
+
+### 
