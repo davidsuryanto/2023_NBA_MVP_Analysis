@@ -12,6 +12,12 @@ mvp_winners <- df %>%
   mutate(mvp = award_share == max(award_share)) %>%
   filter(mvp == 'TRUE')
 
+mvps <- mvp_winners %>%
+  select(season, player, pos, Team, pts_per_g, ast_per_g, trb_per_g, stl_per_g, blk_per_g) %>%
+  arrange(desc(season))
+
+## ws, win_loss_pct, per, ts_pct, award_share) 
+
 # mvp stats from another dataset
 mvp_stats2 <- df2 %>%
   group_by(Year) %>%
@@ -154,6 +160,38 @@ mvp_candidate_2019 <- df %>%
 mvp_candidate_2018 <- df %>%
   filter(season == 2018 & player %in% c("James Harden", "LeBron James", "Anthony Davis", "Damian Lillard", "Russell Westbrook")) %>%
   select(player, season, Team, g, pts_per_g, trb_per_g, ast_per_g, blk_per_g, stl_per_g, fg_pct, per, ws, win_loss_pct, award_share, double_double,mvp)
+
+# a model that determines the top 10 best performing players in each season
+set.seed(123)
+
+# split data into 80% training and 20% testing
+trainIndex <- createDataPartition(df$player, p = 0.8, list = FALSE, times = 1)
+train <- df[trainIndex,]
+test <- df[-trainIndex,]
+
+# perform linear regression on training set
+lm_model <- lm(per ~ pts_per_g + trb_per_g + ast_per_g + stl_per_g + blk_per_g + ws + win_loss_pct, data = train)
+
+# print summary of the model
+summary(lm_model)
+
+highest_per <- df %>% 
+  group_by(season) %>% 
+  filter(per == max(per)) %>% 
+  select(season, player, per)
+
+mvp_highest_per <- mvp_winners %>% 
+  left_join(highest_per, by = "season") %>% 
+  arrange(season)
+
+mvp_highest_per <- mvp_highest_per %>% 
+  group_by(season) %>% 
+  mutate(rank = rank(-per.x)) %>% 
+  ungroup()
+
+per_rank_table <- mvp_highest_per %>% 
+  select(season, player.x, per.x, player.y, per.y, rank) %>% 
+  arrange(season)
 
 # Creating plots
 ggplot(mvp_stats2, aes(x = PTS, y = W.L.)) + geom_point() + labs(x = "Points per game", y = "Win/Lose percentage")

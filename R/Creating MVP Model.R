@@ -8,15 +8,6 @@ source("R/Base_Code.R")
 # train <- df[trainIndex,]
 # test <- df[-trainIndex,]
 
-# perform linear regression on training set
-lm_model <- lm(award_share ~ pts_per_g + trb_per_g + ast_per_g + stl_per_g + blk_per_g + ws + win_loss_pct + per + ts_pct, data = train_data)
-
-
-pred <- predict(lm_model, player_stats_2023)
-
-
-# print summary of the model
-summary(lm_model)
 
 # mvp_candidate_2018 <- subset(df, award_share > 0 & season == 2018)
 # lm_2018 <- lm(award_share ~ ws, data = mvp_candidate_2018)
@@ -28,31 +19,35 @@ summary(lm_model)
 # Only 581 NBA players received MVP votes from year 1982-2022
 train_data <- subset(df, award_share > 0)
 
+mvp_winners <- df %>%
+  group_by(season) %>%
+  mutate(mvp = award_share == max(award_share)) %>%
+  filter(mvp == 'TRUE')
 
+mvps <- mvp_winners %>%
+  select(season, player, pos, Team, pts_per_g, ast_per_g, trb_per_g, stl_per_g, blk_per_g) %>%
+  arrange(desc(season))
 
 ### WIN/LOSS PCT EFFECTS ON AWARD SHARE
 mvp_win_loss <- mvp_winners %>%
-  select(player, Team, season, win_loss_pct, mvp) 
+  select(player, Team, season, win_loss_pct, mvp) %>%
+  arrange(desc(win_loss_pct))
 # Only 11 out of the 41 (26.8%) 1982-2022 MVP winners have win/loss percentage below 70%
 
 # graph showing the correlation between win/loss pct and award shares
-ggplot(mvp_winners, aes(x = win_loss_pct, y = award_share)) +
+award_share_wlp <- ggplot(mvp_winners, aes(x = win_loss_pct, y = award_share)) +
   geom_point() +
   xlab("Win/Loss Percentage") +
-  ylab("Award Share") +
-  ggtitle("Win/Loss Percentage - Award Share")
+  ylab("MVP Share") +
+  ggtitle("Win/Loss Percentage - Award Share") + 
+  stat_smooth(method = lm)
 
 lm_wlp <- lm(award_share ~ win_loss_pct, data = train_data)
 summary(lm_wlp)
 
 
 
-
 ### AVERAGE PER RATING FOR MVP AND NON-MVP WINNERS
-mvp_winners <- df %>%
-  group_by(season) %>%
-  mutate(mvp = award_share == max(award_share)) %>%
-  filter(mvp == 'TRUE')
 
 non_mvp_winners <- filter(df, mvp == 'FALSE')
 
@@ -60,8 +55,11 @@ lm_per <- lm(award_share ~ per, data = train_data)
 summary(lm_per)
 
 # simple regression on award_share ~ per
-ggplot(train_data, aes(award_share, per)) +
+award_share_per <- ggplot(train_data, aes(award_share, per)) +
   geom_point() +
+  xlab("MVP Share") +
+  ylab("Player Efficiency Rating (PER)") +
+  ggtitle("Award Share ~ PER") +
   stat_smooth(method = lm)
 
 # The difference between the average per for mvp and non-mvp winners is 15.6
@@ -81,8 +79,11 @@ lm_ws <- lm(award_share ~ ws, data = train_data)
 summary(lm_ws)
 
 # simple regression on award_share ~ ws
-ggplot(df, aes(award_share, ws)) +
+award_share_ws <- ggplot(df, aes(award_share, ws)) +
   geom_point() +
+  xlab("MVP Share") +
+  ylab("Win Share") +
+  ggtitle("MVP Share ~ Win Share") +
   stat_smooth(method = lm)
 
 
@@ -97,8 +98,11 @@ lm_ts_pct <- lm(award_share ~ ts_pct, data = train_data)
 summary(lm_ts_pct)
 
 # simple regression on award_share ~ ts_pct
-ggplot(train_data, aes(award_share, ts_pct)) +
+award_share_ts <- ggplot(train_data, aes(award_share, ts_pct)) +
   geom_point() +
+  xlab("MVP Share") +
+  ylab("True Shooting %") +
+  ggtitle("MVP Share ~ TS%") +
   stat_smooth(method = lm)
 
 
@@ -125,6 +129,18 @@ ggplot(train_data, aes(award_share, blk_per_g)) +
   geom_point() +
   stat_smooth(method = lm)
 # bpg does not really matter
+
+
+# LINEAR MODEL TEST
+# perform linear regression on training set
+lm_model <- lm(award_share ~ pts_per_g + trb_per_g + ast_per_g + stl_per_g + blk_per_g + ws + win_loss_pct + per + ts_pct, data = train_data)
+
+
+pred <- predict(lm_model, player_stats_2023)
+pred
+
+# print summary of the model
+summary(lm_model)
 
 
 
