@@ -16,14 +16,6 @@ output:
 
 Please see <https://www.basketball-reference.com/about/glossary.html> for info on variables
 
-## Sample Tables:
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-source('R/top5mvp.R')
-knitr::kable(recentmvp, caption = "Table 1: Recent NBA MVPs")
-knitr::kable(lowpoints, caption = "Table 2: MVPs with Lowest PPG")
-```
-
 ### **Table 1: MVP Winners (1982-2022)**
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
