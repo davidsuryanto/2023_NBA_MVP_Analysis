@@ -14,7 +14,7 @@ output:
 
 ## Dataset:
 
-Please see <https://www.basketball-reference.com/about/glossary.html> for info on variables
+Please see <https://www.kaggle.com/datasets/robertsunderhaft/nba-player-season-statistics-with-mvp-win-share> for the data set on NBA players (1982-2022) and information on variables
 
 ### **Table 1: MVP Winners (1982-2022)**
 
