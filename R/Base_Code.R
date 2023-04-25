@@ -27,7 +27,6 @@ head(team_stats)
 team_stats <- merge(team_stats, abb, by = c("Team"))
 nba_data <- merge(team_stats, df, by = c("team_id", "season"))
 df <- merge(df, abb, by = c("team_id"))
-player_stats_2023 <- merge(player_stats_2023, abb, by = c("team_id"))
 player_stats_2023 <- merge(player_stats_2023, team_stats_2023, by = c("Team"))
 
 # add a column of whether the player has a double-double season 
