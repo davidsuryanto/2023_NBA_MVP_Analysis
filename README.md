@@ -8,34 +8,14 @@
 
 ## Dataset:
 
-Please see <https://www.basketball-reference.com/about/glossary.html> for info on variables
-
-## Sample Tables:
-
-| Year | Player                | Pos | Team                  |  PTS |  AST |  TRB |
-|-----:|:----------------------|:----|:----------------------|-----:|-----:|-----:|
-| 2021 | Nikola Jokić          | C   | Denver Nuggets        | 26.4 |  8.3 | 10.8 |
-| 2020 | Giannis Antetokounmpo | PF  | Milwaukee Bucks       | 29.5 |  5.6 | 13.6 |
-| 2019 | Giannis Antetokounmpo | PF  | Milwaukee Bucks       | 27.7 |  5.9 | 12.5 |
-| 2018 | James Harden          | SG  | Houston Rockets       | 30.4 |  8.8 |  5.4 |
-| 2017 | Russell Westbrook     | PG  | Oklahoma City Thunder | 31.6 | 10.4 | 10.7 |
-
-Table 1: Recent NBA MVPs
-
-| Year | Player        | Pos | Team               |  PTS |
-|-----:|:--------------|:----|:-------------------|-----:|
-| 2005 | Steve Nash    | PG  | Phoenix Suns       | 15.5 |
-| 2006 | Steve Nash    | PG  | Phoenix Suns       | 18.8 |
-| 1990 | Magic Johnson | PG  | Los Angeles Lakers | 22.3 |
-| 1989 | Magic Johnson | PG  | Los Angeles Lakers | 22.5 |
-| 2003 | Tim Duncan    | PF  | San Antonio Spurs  | 23.3 |
-
-Table 2: MVPs with Lowest PPG
+Please see
+<https://www.kaggle.com/datasets/robertsunderhaft/nba-player-season-statistics-with-mvp-win-share>
+for the data set on NBA players (1982-2022) and information on variables
 
 ### **Table 1: MVP Winners (1982-2022)**
 
 | season | player                | pos | Team                   | pts_per_g | ast_per_g | trb_per_g | stl_per_g | blk_per_g |
-|-------:|:----------------------|:----|:-----------------------|----------:|----------:|----------:|----------:|----------:|
+|-----:|:-------------|:---|:--------------|------:|------:|------:|------:|------:|
 |   2022 | Nikola Jokić          | C   | Denver Nuggets         |      27.1 |       7.9 |      13.8 |       1.5 |       0.9 |
 |   2021 | Nikola Jokić          | C   | Denver Nuggets         |      26.4 |       8.3 |      10.8 |       1.3 |       0.7 |
 |   2020 | Giannis Antetokounmpo | PF  | Milwaukee Bucks        |      29.5 |       5.6 |      13.6 |       1.0 |       1.0 |
@@ -124,26 +104,33 @@ Table 2: MVPs with Lowest PPG
 | Russell Westbrook     | Oklahoma City Thunder  |   2017 |        0.573 | TRUE |
 | Moses Malone          | Houston Rockets        |   1982 |        0.561 | TRUE |
 
-Note: Only 11 out of the 41 (26.8%) MVP winners from 1982-2022 have win/loss percentage below 70% and only 3 of them are below 60%.
+Note: Only 11 out of the 41 (26.8%) MVP winners from 1982-2022 have
+win/loss percentage below 70% and only 3 of them are below 60%.
 
-![](README_files/figure-markdown_github/unnamed-chunk-3-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
 ### **Graph: Correlation Between MVP Share and PER rating**
 
-![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
-Note: MVPs average PER rating = 28.3 and Non-MVPs average PER rating = 12.7. This proves how crucial it is for NBA players to have a high PER rating in order to be considered in the MVP race.
+Note: MVPs average PER rating = 28.3 and Non-MVPs average PER rating =
+12.7. This proves how crucial it is for NBA players to have a high PER
+rating in order to be considered in the MVP race.
 
 ### **Graph:** Correlation Between MVP Share and Win Share
 
-![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
-Note: MVPs average win share = 16.02 and Non-MVPs average win share = 2.62. This proves how crucial it is for NBA players to have a high win share % in order to be considered in the MVP race.
+Note: MVPs average win share = 16.02 and Non-MVPs average win share =
+2.62. This proves how crucial it is for NBA players to have a high win
+share % in order to be considered in the MVP race.
 
 ### **Graph: Correlation Between MVP Share and True Shooting %**
 
-![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
-Note: MVPs average true shooting(%) = 59.3% and Non-MVPs average true shooting(%) = 51.3%. This proves how crucial it is for NBA players to have a high true shooting % in order to be considered in the MVP race.
+Note: MVPs average true shooting(%) = 59.3% and Non-MVPs average true
+shooting(%) = 51.3%. This proves how crucial it is for NBA players to
+have a high true shooting % in order to be considered in the MVP race.
 
 ### 
