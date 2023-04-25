@@ -17,7 +17,7 @@ source("R/Base_Code.R")
 # lm_model <- lm(award_share ~ pts_per_g + trb_per_g + ast_per_g + stl_per_g + blk_per_g + ws + win_loss_pct + per, data = train_data)
 
 # Only 581 NBA players received MVP votes from year 1982-2022
-train_data <- subset(df, award_share > 0)
+train <- subset(df, award_share > 0)
 
 mvp_winners <- df %>%
   group_by(season) %>%
@@ -131,9 +131,7 @@ ggplot(train_data, aes(award_share, blk_per_g)) +
 # bpg does not really matter
 
 
-# LINEAR MODEL TEST
-# perform linear regression on training set
-lm_model <- lm(award_share ~ pts_per_g + trb_per_g + ast_per_g + stl_per_g + blk_per_g + ws + win_loss_pct + per + ts_pct, data = train_data)
+
 
 
 pred <- predict(lm_model, player_stats_2023)
@@ -144,6 +142,33 @@ summary(lm_model)
 
 
 
+# LINEAR MODEL TEST
+set.seed(123)
 
+# split the data into training and testing sets
+train_index <- sample(nrow(df), floor(0.7 * nrow(df)))
+train_data <- df[train_index, ]
+test_data <- df[-train_index, ]
+
+# perform linear regression on training set
+lm_model <- lm(award_share ~ mp_per_g + pts_per_g + trb_per_g + ast_per_g + stl_per_g + blk_per_g + ws + ws_per_48 + win_loss_pct + per + ts_pct, data = train_data)
+
+# print summary of the model
+summary(lm_model)
+
+
+# Testing out the model to testing set
+pred <- predict(lm_model, newdata = test_data)
+
+rmse <- sqrt(mean((pred - test_data$award_share)^2))
+print(paste0("RMSE: ", rmse))
+
+rsq <- summary(lm_model)$r.squared
+print(paste0("R-squared: ", rsq))
+
+
+# Apply model to NBA players 2023
+prediction <- predict(lm_model, newdata = player_stats_2023)
+print(paste0("Predicted MVP award share: ", prediction))
 
 
