@@ -133,7 +133,7 @@ Note: MVPs average true shooting(%) = 59.3% and Non-MVPs average true
 shooting(%) = 51.3%. This proves how crucial it is for NBA players to
 have a high true shooting % in order to be considered in the MVP race.
 
-### **Decision Tree Model**
+# **Decision Tree Model**
 
 > formula \<- award_share \~ mp_per_g + g + pts_per_g + trb_per_g +
 > ast_per_g + stl_per_g + blk_per_g + fg_pct + win_loss_pct + per +
@@ -204,7 +204,7 @@ winners
 
 Predicted Winner: Nikola Jokic
 
-### **Linear Regression Model**
+# **Linear Regression Model**
 
 > lm_model \<- lm(award_share \~ mp_per_g + pts_per_g + trb_per_g +
 > ast_per_g + stl_per_g + blk_per_g + ws + ws_per_48 + win_loss_pct +
