@@ -301,3 +301,24 @@ winners
 | 409 | Shai Gilgeous-Alexander | Oklahoma City Thunder |             0.1396123 |
 
 Predicted Winner: Nikola Jokic
+
+# **Conclusion**
+
+While our analysis has shown that player performance metrics can be a
+useful predictor for NBA MVP awards, it’s important to note that
+declaring the MVP has not always been purely based on players’ stats or
+performance. Social media, media coverage, and people’s bias opinions
+have also had an impact on the decision-making process. For example,
+many believe that Nikola Jokic should have won the 2023 NBA MVP but
+since this award will make him a 3-time back-to-back NBA MVP winner,
+that will put him into the GOAT (Greatest Of All Time) conversation
+which some people can’t accept yet. During an interview between an NBA
+legend Kevin Garnett and an NBA All Star Demarcous Cousins on the “KG
+Certified” talk show, Cousins said “I’m not okay with being three MVPs
+in a row because it then becomes a conversation of, is this the best
+basketball player to ever touch a basketball?” Then he continues by
+saying “Not saying he doesn’t deserve more down the road. But at this
+stage in his career, I’m not okay with saying that. He hasn’t won
+anything. He hasn’t been to a final. It’s a lot of things still in play
+for that.” Therefore, it’s crucial to consider these factors alongside
+player performance metrics when evaluating potential MVP candidates.
