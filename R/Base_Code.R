@@ -4,6 +4,8 @@ library(ggplot2)
 library(tidyr)
 library(lattice)
 library(caret)
+library(rpart)
+library(rpart.plot)
 
 # read files
 df <- read.csv('data/NBA_Dataset.csv')
