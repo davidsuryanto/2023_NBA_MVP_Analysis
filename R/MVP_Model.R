@@ -15,7 +15,7 @@ test_data <- df[-train_index, ]
 ### Decision Tree Model
 formula <- award_share ~ mp_per_g + g + pts_per_g + trb_per_g + ast_per_g + stl_per_g + blk_per_g + fg_pct + win_loss_pct + per + ows + dws + ws_per_48 + obpm + dbpm + ts_pct
 tree_model <- rpart(formula, data = train_data)
-rpart.plot(tree_model)
+# rpart.plot(tree_model)
 
 
 
