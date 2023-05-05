@@ -133,6 +133,77 @@ Note: MVPs average true shooting(%) = 59.3% and Non-MVPs average true
 shooting(%) = 51.3%. This proves how crucial it is for NBA players to
 have a high true shooting % in order to be considered in the MVP race.
 
+### **Decision Tree Model**
+
+> formula \<- award_share \~ mp_per_g + g + pts_per_g + trb_per_g +
+> ast_per_g + stl_per_g + blk_per_g + fg_pct + win_loss_pct + per +
+> ows + dws + ws_per_48 + obpm + dbpm + ts_pct
+>
+> tree_model \<- rpart(formula, data = train_data)
+
+![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
+
+### **Testing the Decision Tree Model for the Highest Predicted MVP Award Share and Actual MVP Winners for each year**
+
+|       | Season | Player                | Team                   | Predicted_Award_Share | Actual_MVP |
+|:-----|------:|:----------------|:-----------------|----------------:|:--------|
+| 11475 |   1982 | Julius Erving         | Philadelphia 76ers     |             0.7509286 | FALSE      |
+| 11489 |   1983 | Moses Malone          | Philadelphia 76ers     |             0.7509286 | TRUE       |
+| 1179  |   1984 | Larry Bird            | Boston Celtics         |             0.7509286 | TRUE       |
+| 1191  |   1985 | Larry Bird            | Boston Celtics         |             0.7509286 | TRUE       |
+| 1204  |   1986 | Larry Bird            | Boston Celtics         |             0.7509286 | TRUE       |
+| 7240  |   1987 | Magic Johnson         | Los Angeles Lakers     |             0.8342941 | TRUE       |
+| 2219  |   1988 | Michael Jordan        | Chicago Bulls          |             0.8342941 | TRUE       |
+| 2231  |   1989 | Michael Jordan        | Chicago Bulls          |             0.8342941 | FALSE      |
+| 2243  |   1990 | Michael Jordan        | Chicago Bulls          |             0.8342941 | FALSE      |
+| 2256  |   1991 | Michael Jordan        | Chicago Bulls          |             0.8342941 | TRUE       |
+| 2267  |   1992 | Michael Jordan        | Chicago Bulls          |             0.8342941 | TRUE       |
+| 2280  |   1993 | Michael Jordan        | Chicago Bulls          |             0.8342941 | FALSE      |
+| 13806 |   1994 | David Robinson        | San Antonio Spurs      |             0.8342941 | FALSE      |
+| 13820 |   1995 | David Robinson        | San Antonio Spurs      |             0.8342941 | TRUE       |
+| 2324  |   1996 | Michael Jordan        | Chicago Bulls          |             0.8342941 | TRUE       |
+| 2337  |   1997 | Michael Jordan        | Chicago Bulls          |             0.8342941 | FALSE      |
+| 2352  |   1998 | Michael Jordan        | Chicago Bulls          |             0.7509286 | TRUE       |
+| 13862 |   1999 | Tim Duncan            | San Antonio Spurs      |             0.7509286 | FALSE      |
+| 7413  |   2000 | Shaquille O’Neal      | Los Angeles Lakers     |             0.8342941 | TRUE       |
+| 13892 |   2001 | Tim Duncan            | San Antonio Spurs      |             0.7509286 | FALSE      |
+| 13907 |   2002 | Tim Duncan            | San Antonio Spurs      |             0.5092500 | TRUE       |
+| 13922 |   2003 | Tim Duncan            | San Antonio Spurs      |             0.7509286 | TRUE       |
+| 9346  |   2004 | Kevin Garnett         | Minnesota Timberwolves |             0.7509286 | TRUE       |
+| 3540  |   2005 | Dirk Nowitzki         | Dallas Mavericks       |             0.7509286 | FALSE      |
+| 3007  |   2006 | LeBron James          | Cleveland Cavaliers    |             0.5092500 | FALSE      |
+| 3571  |   2007 | Dirk Nowitzki         | Dallas Mavericks       |             0.8342941 | TRUE       |
+| 9656  |   2008 | Chris Paul            | New Orleans Pelicans   |             0.8342941 | FALSE      |
+| 3044  |   2009 | LeBron James          | Cleveland Cavaliers    |             0.8342941 | TRUE       |
+| 3059  |   2010 | LeBron James          | Cleveland Cavaliers    |             0.8342941 | TRUE       |
+| 2527  |   2011 | Derrick Rose          | Chicago Bulls          |             0.7509286 | TRUE       |
+| 8454  |   2012 | LeBron James          | Miami Heat             |             0.7509286 | TRUE       |
+| 8469  |   2013 | LeBron James          | Miami Heat             |             0.8342941 | TRUE       |
+| 8482  |   2014 | LeBron James          | Miami Heat             |             0.8342941 | FALSE      |
+| 5329  |   2015 | Stephen Curry         | Golden State Warriors  |             0.8342941 | TRUE       |
+| 5345  |   2016 | Stephen Curry         | Golden State Warriors  |             0.8342941 | TRUE       |
+| 14137 |   2017 | Kawhi Leonard         | San Antonio Spurs      |             0.7509286 | FALSE      |
+| 5934  |   2018 | James Harden          | Houston Rockets        |             0.8342941 | TRUE       |
+| 9101  |   2019 | Giannis Antetokounmpo | Milwaukee Bucks        |             0.7509286 | TRUE       |
+| 9116  |   2020 | Giannis Antetokounmpo | Milwaukee Bucks        |             0.7509286 | TRUE       |
+| 4311  |   2021 | Nikola Jokić          | Denver Nuggets         |             0.8342941 | TRUE       |
+| 4329  |   2022 | Nikola Jokić          | Denver Nuggets         |             0.8342941 | TRUE       |
+
+Note: Only 28 out of the 41 **(68%)** predicted results match the actual
+winners
+
+### **Top 5 Predicted 2023 MVP Candidates (Decision Tree)**
+
+|     | Player                | Team               | Predicted_Award_Share |
+|:----|:----------------------|:-------------------|----------------------:|
+| 149 | Nikola Jokić          | Denver Nuggets     |             0.8342941 |
+| 435 | Joel Embiid           | Philadelphia 76ers |             0.3402222 |
+| 26  | Jayson Tatum          | Boston Celtics     |             0.3095882 |
+| 338 | Giannis Antetokounmpo | Milwaukee Bucks    |             0.3095882 |
+| 235 | Tyrese Haliburton     | Indiana Pacers     |             0.2175000 |
+
+Predicted Winner: Nikola Jokic
+
 ### **Linear Regression Model**
 
 > lm_model \<- lm(award_share \~ mp_per_g + pts_per_g + trb_per_g +
@@ -145,13 +216,30 @@ have a high true shooting % in order to be considered in the MVP race.
     ##     ast_per_g + stl_per_g + blk_per_g + ws + ws_per_48 + win_loss_pct + 
     ##     per + ts_pct, data = train_data)
     ## 
+    ## Residuals:
+    ##      Min       1Q   Median       3Q      Max 
+    ## -0.13963 -0.01119 -0.00066  0.00920  0.85575 
+    ## 
     ## Coefficients:
-    ##  (Intercept)      mp_per_g     pts_per_g     trb_per_g     ast_per_g  
-    ##     0.057900     -0.005006      0.005416      0.002821      0.005939  
-    ##    stl_per_g     blk_per_g            ws     ws_per_48  win_loss_pct  
-    ##     0.005524      0.007998      0.008235      0.094139     -0.012653  
-    ##          per        ts_pct  
-    ##    -0.002107     -0.037875
+    ##                Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept)   0.0578997  0.0047906  12.086  < 2e-16 ***
+    ## mp_per_g     -0.0050055  0.0001575 -31.777  < 2e-16 ***
+    ## pts_per_g     0.0054156  0.0002372  22.832  < 2e-16 ***
+    ## trb_per_g     0.0028212  0.0003612   7.811 6.15e-15 ***
+    ## ast_per_g     0.0059388  0.0004306  13.790  < 2e-16 ***
+    ## stl_per_g     0.0055241  0.0016854   3.278 0.001050 ** 
+    ## blk_per_g     0.0079978  0.0012916   6.192 6.13e-10 ***
+    ## ws            0.0082347  0.0003202  25.714  < 2e-16 ***
+    ## ws_per_48     0.0941393  0.0135818   6.931 4.38e-12 ***
+    ## win_loss_pct -0.0126533  0.0037025  -3.417 0.000634 ***
+    ## per          -0.0021069  0.0002599  -8.108 5.65e-16 ***
+    ## ts_pct       -0.0378751  0.0078671  -4.814 1.49e-06 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 0.05029 on 12337 degrees of freedom
+    ## Multiple R-squared:  0.2277, Adjusted R-squared:  0.227 
+    ## F-statistic: 330.6 on 11 and 12337 DF,  p-value: < 2.2e-16
 
 ### **Testing the Model for the Highest Predicted MVP Award Share and Actual MVP Winners for each year**
 
@@ -199,7 +287,10 @@ have a high true shooting % in order to be considered in the MVP race.
 | 4311  |   2021 | Nikola Jokić      | Denver Nuggets         |             0.1783051 | TRUE       |
 | 4329  |   2022 | Nikola Jokić      | Denver Nuggets         |             0.1897997 | TRUE       |
 
-### **Top 10 Predicted 2023 MVP Candidates**
+Note: Only 23 out of the 41 **(56%)** predicted results match the actual
+winners
+
+### **Top 5 Predicted 2023 MVP Candidates (Linear Regression)**
 
 |     | Player                  | Team                  | Predicted_Award_Share |
 |:----|:-----------------------|:---------------------|---------------------:|
@@ -208,8 +299,5 @@ have a high true shooting % in order to be considered in the MVP race.
 | 135 | Luka Dončić             | Dallas Mavericks      |             0.1498715 |
 | 338 | Giannis Antetokounmpo   | Milwaukee Bucks       |             0.1417705 |
 | 409 | Shai Gilgeous-Alexander | Oklahoma City Thunder |             0.1396123 |
-| 26  | Jayson Tatum            | Boston Celtics        |             0.1204024 |
-| 477 | Domantas Sabonis        | Sacramento Kings      |             0.1161711 |
-| 309 | Jimmy Butler            | Miami Heat            |             0.1106999 |
-| 259 | Anthony Davis           | Los Angeles Lakers    |             0.1057576 |
-| 195 | Stephen Curry           | Golden State Warriors |             0.1020494 |
+
+Predicted Winner: Nikola Jokic

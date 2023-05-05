@@ -23,7 +23,6 @@ source('R/MVP_Correlation.R')
 knitr::kable(mvps)
 ```
 
-
 ### **Table 2: MVPs Win/Loss Percentage**
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -59,23 +58,58 @@ award_share_ts
 
 Note: MVPs average true shooting(%) = 59.3% and Non-MVPs average true shooting(%) = 51.3%. This proves how crucial it is for NBA players to have a high true shooting % in order to be considered in the MVP race.
 
-### **Linear Regression Model**
-> lm_model <- lm(award_share ~ mp_per_g + pts_per_g + trb_per_g + ast_per_g + stl_per_g + blk_per_g + ws + ws_per_48 + win_loss_pct + per + ts_pct, data = train_data)
+### **Decision Tree Model**
+
+> formula \<- award_share \~ mp_per_g + g + pts_per_g + trb_per_g + ast_per_g + stl_per_g + blk_per_g + fg_pct + win_loss_pct + per + ows + dws + ws_per_48 + obpm + dbpm + ts_pct
+>
+> tree_model \<- rpart(formula, data = train_data)
+
 ```{r echo=FALSE}
 source('R/MVP_Model.R')
-lm_model
+rpart.plot(tree_model)
+```
+
+### **Testing the Decision Tree Model for the Highest Predicted MVP Award Share and Actual MVP Winners for each year**
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source('R/MVP_Model.R')
+knitr::kable(tree_top_predicted_winners)
+```
+
+Note: Only 28 out of the 41 **(68%)** predicted results match the actual winners
+
+### **Top 5 Predicted 2023 MVP Candidates (Decision Tree)**
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source('R/MVP_Model.R')
+knitr::kable(top_10_tree_pred)
+```
+
+Predicted Winner: Nikola Jokic
+
+### **Linear Regression Model**
+
+> lm_model \<- lm(award_share \~ mp_per_g + pts_per_g + trb_per_g + ast_per_g + stl_per_g + blk_per_g + ws + ws_per_48 + win_loss_pct + per + ts_pct, data = train_data)
+
+```{r echo=FALSE}
+source('R/MVP_Model.R')
+summary(lm_model)
 ```
 
 ### **Testing the Model for the Highest Predicted MVP Award Share and Actual MVP Winners for each year**
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 source('R/MVP_Model.R')
 knitr::kable(top_predicted_winners)
 ```
 
-### **Top 10 Predicted 2023 MVP Candidates**
+Note: Only 23 out of the 41 **(56%)** predicted results match the actual winners
+
+### **Top 5 Predicted 2023 MVP Candidates (Linear Regression)**
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 source('R/MVP_Model.R')
-knitr::kable(top_10_pred)
+knitr::kable(top_10_lm_pred)
 ```
 
-
+Predicted Winner: Nikola Jokic
