@@ -1,16 +1,21 @@
-# NBA Analysis
+# 2023 NBA MVP Analysis
 
 ### Author: David Suryanto
 
 ![](https://1000logos.net/wp-content/uploads/2017/04/Logo-NBA.png)
 
-## Project Goal: Predict The 2023 NBA MVP
+## Project Goal: Predict the 2023 NBA MVP purely based on stats and previous MVP winners.
 
 ## Dataset:
 
-Please see
+\- NBA_Dataset:
 <https://www.kaggle.com/datasets/robertsunderhaft/nba-player-season-statistics-with-mvp-win-share>
-for the data set on NBA players (1982-2022) and information on variables
+
+\- 2023_NBA_Player_Stats:
+<https://www.kaggle.com/datasets/iabdulw/nba-player-performance-stats>
+
+\- NBA_Dataset_2:
+<https://www.kaggle.com/datasets/vivovinco/19912021-nba-stats?select=players.csv>
 
 ### **Table 1: MVP Winners (1982-2022)**
 
